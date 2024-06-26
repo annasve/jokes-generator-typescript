@@ -1,35 +1,60 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import { Form } from './components/Form/Form';
+import { Joke } from './components/Joke/Joke';
+
+import { sourceOfJokes } from './source/jokes-data.ts';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [userName, setUserName] = useState<string>();
+  const [jokesData, setJokesData] = useState<
+    { id: number; type: string; setup: string; punchline: string }[]
+  >([{ id: 0, type: '', setup: '', punchline: '' }]);
+
+  const generateJokesData = (
+    type: string,
+    count: number,
+    source: { type: string; setup: string; punchline: string }[],
+  ) => {
+    setJokesData(
+      source
+        .filter((item) => item.type === type)
+        .map((item, index) => ({ ...item, id: index }))
+        .slice(0, count),
+    );
+  };
+
+  const handleSendData = (data: {
+    count: number;
+    name: string;
+    type: string;
+  }) => {
+    setUserName(data.name);
+    generateJokesData(data.type, data.count, sourceOfJokes);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app">
+      {jokesData[0].setup !== '' ? (
+        <div className="app__container">
+          <h2>{userName}</h2>
+          <h3>There are jokes for you!</h3>
+          {jokesData.map((item) => (
+            <Joke key={item.id} setup={item.setup} punchline={item.punchline} />
+          ))}
+          <span
+            className="app__container__back-icon"
+            onClick={() => setJokesData([])}
+          ></span>
+        </div>
+      ) : (
+        <div className="app__container">
+          <h2>Welcome to jokes generator</h2>
+          <h3>Please fill the form:</h3>
+          <Form onSubmitData={handleSendData} />
+        </div>
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
