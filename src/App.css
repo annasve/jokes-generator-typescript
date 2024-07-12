@@ -1,42 +1,80 @@
+:root {
+  --lightyellow: #F3F3B0;
+  --canaryyellow: #E4E448;
+  --purple: #6c6caa;
+  --grey: #525252;
+}
+
 #root {
+  color: var(--grey);
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.form__container {
+  background-color: var(--canaryyellow);
+  width: 70vw;
+  border-radius: 16px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.form__container__waves {
+  display: block;
+  border-radius: 16px;
+}
+
+.form__container__foreground {
+  display: flex;
+  padding-top: 60px;
+  justify-content: space-evenly;
+}
+
+.form__container__welcome {
+  display: flex;
+  place-items: center;
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-size: 1.6rem;
+  padding: 1rem;
+}
+
+.joke__container__back-button {
+  margin-top: 60px;
+  margin-bottom: 20px;
+  padding: 5%;
+  min-width: 100px;
+}
+
+.joke__container__back-button__back-icon {
+  font-size: 32px;
+}
+
+.jokes__overview {
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+}
+
+@media screen and (max-width:576px) {
+  .form__container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
-  to {
-    transform: rotate(360deg);
+
+  .form__container,
+  .form__container__waves {
+    border-radius: 0;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .form__container__foreground {
+    flex-direction: column;
   }
-}
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  .form__container__welcome {
+    display: block;
+    text-align: center;
+  }
 }

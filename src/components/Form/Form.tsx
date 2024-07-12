@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import './Form.css';
 
 const TYPES = ['general', 'dad', 'knock-knock', 'programming'];
 
@@ -29,6 +30,10 @@ export const Form = ({
     onSubmitData(formData);
   };
 
+  useEffect(() => {
+    document.body.className = 'light-bgr';
+  }, []);
+
   return (
     <form className="form" onSubmit={handleSubmit}>
       <label className="form__label">
@@ -42,7 +47,7 @@ export const Form = ({
       </label>
       <br />
       <label className="form__label">
-        Select type of Jokes
+        Select type of jokes
         <select
           className="form__input"
           name="name"
@@ -59,7 +64,7 @@ export const Form = ({
       </label>
       <br />
       <label className="form__label">
-        Select count of Jokes
+        Select count of jokes
         <select
           className="form__input"
           name="name"
@@ -78,7 +83,7 @@ export const Form = ({
       </label>
       <br />
       <button className="form__button" type="submit">
-        Submit
+        Show jokes
       </button>
     </form>
   );

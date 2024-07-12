@@ -1,0 +1,35 @@
+.light-bgr {
+  background-color: #F3F3B0;
+}
+
+.form {
+  padding: 1rem;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.form__label {
+  line-height: 2;
+}
+
+.form__input {
+  width: 100%;
+  border-radius: 4px;
+  height: 2rem;
+  font-family: "Poppins";
+  font-size: 0.9rem;
+}
+
+.form__button {
+  align-self: center;
+  padding: 10%;
+}
+
+
+@media screen and (max-width:576px) {
+  .form__button {
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+}

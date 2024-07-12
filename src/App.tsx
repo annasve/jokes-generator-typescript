@@ -4,6 +4,9 @@ import { Joke } from './components/Joke/Joke';
 
 import { sourceOfJokes } from './source/jokes-data.ts';
 
+import { MdOutlineUndo } from 'react-icons/md';
+import './App.css';
+
 function App() {
   const [userName, setUserName] = useState<string>();
   const [jokesData, setJokesData] = useState<
@@ -35,22 +38,42 @@ function App() {
   return (
     <div className="app">
       {jokesData[0].setup !== '' ? (
-        <div className="app__container">
-          <h2>{userName}</h2>
-          <h3>There are jokes for you!</h3>
-          {jokesData.map((item) => (
-            <Joke key={item.id} setup={item.setup} punchline={item.punchline} />
-          ))}
-          <span
-            className="app__container__back-icon"
-            onClick={() => setJokesData([])}
-          ></span>
+        <div className="app__container joke__container">
+          <div className="joke__welcome">
+            <h2>
+              {userName}
+              <br />
+              There are jokes for you!
+            </h2>
+          </div>
+          <div className="jokes__overview">
+            {jokesData.map((item) => (
+              <Joke
+                key={item.id}
+                setup={item.setup}
+                punchline={item.punchline}
+              />
+            ))}
+          </div>
+          <button
+            className="joke__container__back-button"
+            type="button"
+            onClick={() =>
+              setJokesData([{ id: 0, type: '', setup: '', punchline: '' }])
+            }
+          >
+            <MdOutlineUndo className="joke__container__back-button__back-icon" />
+          </button>
         </div>
       ) : (
-        <div className="app__container">
-          <h2>Welcome to jokes generator</h2>
-          <h3>Please fill the form:</h3>
-          <Form onSubmitData={handleSendData} />
+        <div className="form__container form__container">
+          <div className="form__container__foreground">
+            <h2 className="form__container__welcome">
+              Welcome to jokes generator
+            </h2>
+            <Form onSubmitData={handleSendData} />
+          </div>
+          <img className="form__container__waves" src="/waves.svg" alt="" />
         </div>
       )}
     </div>
